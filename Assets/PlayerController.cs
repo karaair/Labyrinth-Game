@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Camera cam;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer rend;
 
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject cursor;
@@ -23,6 +25,17 @@ public class PlayerController : MonoBehaviour
         */
 
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("X_WalkValue", Input.GetAxisRaw("Horizontal"));
+        animator.SetFloat("Y_WalkValue", Input.GetAxisRaw("Vertical"));
+        
+        if(Input.GetAxisRaw("Horizontal") < 0)
+        {
+            rend.flipX = true;
+        }
+        else
+        {
+            rend.flipX = false;
+        }
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
